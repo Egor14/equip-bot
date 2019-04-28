@@ -21,9 +21,11 @@ def echo_all(message):
     #print(message.text)
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM home_car')
-    records = cursor.fetchall()
-    bot.reply_to(message, 'Egor')
+    #records = cursor.fetchall()
+    #bot.reply_to(message, 'Egor')
     #print(records)
+    for row in cursor:
+        bot.reply_to(message, row.year)
     cursor.close()
     conn.close()
 
