@@ -20,13 +20,13 @@ def echo_all(message):
 
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM home_car WHERE model = %s', (message.text,))
-    if len(cursor) > 0:
-        for row in cursor:
-            s = ''
-            for i in row:
-                s += str(i) + '\n'
-            bot.reply_to(message, s)
-    else:
+    s = ''
+    for row in cursor:
+        s = ''
+        for i in row:
+            s += str(i) + '\n'
+        bot.reply_to(message, s)
+    if s == '':
         bot.reply_to(message, 'К сожалению, данной модели нет в наличии')
     cursor.close()
     conn.close()
