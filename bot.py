@@ -25,7 +25,10 @@ def echo_all(message):
     #bot.reply_to(message, 'Egor')
     #print(records)
     for row in cursor:
-        bot.reply_to(message, row.year)
+        s = ''
+        for i in row:
+            s += str(i) + '\n'
+        bot.reply_to(message, s)
     cursor.close()
     conn.close()
 
