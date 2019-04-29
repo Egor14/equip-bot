@@ -24,13 +24,17 @@ def echo_all(message):
     cursor.execute(
         'SELECT home_dealer.name, home_dealer.phone_number, home_car.model, home_car.year, home_car.city, home_car.count FROM home_car, home_dealer WHERE home_car.user_id = home_dealer.id AND model = %s',
         (message.text,))
-    s = ''
+    s = True
+    # for row in cursor:
+    #     s = ''
+    #     for i in row:
+    #         s += str(i) + '\n'
+    #     bot.reply_to(message, s)
     for row in cursor:
-        s = ''
-        for i in row:
-            s += str(i) + '\n'
-        bot.reply_to(message, s)
-    if s == '':
+        bot.reply_to(message, ('Компания: ' + str(row[0]) + '\nНомер телефона: ' + str(row[1]) + '\nМодель: ' + str(
+            row[2]) + '\nГод: ' + str(row[3]) + '\nГород: ' + str(row[4]) + '\nКоличество: ' + str(row[5])))
+        s = False
+    if s:
         bot.reply_to(message, 'К сожалению, данной модели нет в наличии')
     cursor.close()
     conn.close()
