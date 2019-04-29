@@ -22,8 +22,7 @@ def echo_all(message):
 
     cursor = conn.cursor()
     cursor.execute(
-        'SELECT home_dealer.name, home_dealer.phone_number, home_car.model, home_car.year, home_car.city, home_car.count' +
-        'FROM home_car, home_dealer WHERE home_car.user_id = home_dealer.id AND model = %s',
+        'SELECT home_dealer.name, home_dealer.phone_number, home_car.model, home_car.year, home_car.city, home_car.count FROM home_car, home_dealer WHERE home_car.user_id = home_dealer.id AND model = %s',
         (message.text,))
     s = ''
     for row in cursor:
