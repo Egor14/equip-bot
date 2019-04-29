@@ -21,7 +21,7 @@ def echo_all(message):
                             host='ec2-54-225-129-101.compute-1.amazonaws.com')
 
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM home_car WHERE model = %s', (message.text,))
+    cursor.execute('SELECT * FROM home_car, home_dealer WHERE home_car.user_id = home_dealer.id AND model = %s', (message.text,))
     s = ''
     for row in cursor:
         s = ''
