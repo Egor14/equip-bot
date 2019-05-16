@@ -1,10 +1,8 @@
 import telebot
 import psycopg2
-from telebot.types import Message
+import os
 
-TOKEN = '896316693:AAE20bxKggrR7ZvXOXySh8gVBgweMmKhVkA'
-
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(os.environ['TOKEN'])
 
 
 @bot.message_handler(commands=['start', 'help'])
@@ -25,11 +23,6 @@ def echo_all(message):
         'SELECT home_dealer.name, home_dealer.phone_number, home_car.model, home_car.year, home_car.city, home_car.count FROM home_car, home_dealer WHERE home_car.user_id = home_dealer.id AND model = %s',
         (message.text,))
     s = True
-    # for row in cursor:
-    #     s = ''
-    #     for i in row:
-    #         s += str(i) + '\n'
-    #     bot.reply_to(message, s)
     for row in cursor:
         bot.reply_to(message, ('Компания: ' + str(row[0]) + '\nНомер телефона: ' + str(row[1]) + '\nМодель: ' + str(
             row[2]) + '\nГод: ' + str(row[3]) + '\nГород: ' + str(row[4]) + '\nКоличество: ' + str(row[5])))
