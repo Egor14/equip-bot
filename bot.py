@@ -14,9 +14,9 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    conn = psycopg2.connect(dbname='dfttd1019a6clc', user='pmjdivbrbpkefa',
-                            password='0d2581df34fa354b9f6b2b1d0a613e63404d501ee39b2a6fcf3b47e4d0c126ce',
-                            host='ec2-54-225-129-101.compute-1.amazonaws.com')
+    conn = psycopg2.connect(dbname=os.environ['dbname'], user=os.environ['user'],
+                            password=os.environ['password'],
+                            host=os.environ['host'])
 
     cursor = conn.cursor()
     cursor.execute(
@@ -34,3 +34,4 @@ def echo_all(message):
 
 
 bot.polling(timeout=60)
+
