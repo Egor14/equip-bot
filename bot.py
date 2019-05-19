@@ -9,7 +9,7 @@ bot = telebot.TeleBot(os.environ['TOKEN'])
 def send_welcome(message):
     bot.reply_to(message, "Напиши мне номер модели, и ты получишь всю необходимую информацию\n" +
                  "Если же ты хочешь добавить свою технику в нашу базу для быстрого поиска клиентов, то сделать это можно по ссылке: " +
-                 "https://beta-equipment.herokuapp.com")
+                 "www.sklad-kamaz.ru")
 
 
 @bot.message_handler(func=lambda message: True)
