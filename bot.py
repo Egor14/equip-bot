@@ -2,7 +2,9 @@ import telebot
 import psycopg2
 import os
 
-bot = telebot.TeleBot(os.environ['TOKEN'])
+import settings_local as SETTINGS
+
+bot = telebot.TeleBot(SETTINGS.TOKEN)
 
 
 @bot.message_handler(commands=['start', 'help'])
@@ -14,9 +16,9 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    conn = psycopg2.connect(dbname=os.environ['dbname'], user=os.environ['user'],
-                            password=os.environ['password'],
-                            host=os.environ['host'])
+    conn = psycopg2.connect(dbname=SETTINGS.DB['dbname'], user=SETTINGS.DB['user'],
+                            password=SETTINGS.DB['password'],
+                            host=SETTINGS.DB['host'])
 
     cursor = conn.cursor()
     cursor.execute(
