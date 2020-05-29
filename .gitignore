@@ -110,3 +110,5 @@ __pycache__/
 # IntelliJ files
 .idea/
 *.iml
+settings_local.py
+.vscode/
